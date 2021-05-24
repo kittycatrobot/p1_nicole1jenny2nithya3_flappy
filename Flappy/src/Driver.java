@@ -26,22 +26,9 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	private Image dirt = null;
-	private Image water = null;
 	
 	public void paint(Graphics g) {
 		this.setSize(1600, 900);
-		dirt = getImage("mcdirt.png");
-		water = getImage("mcwater.png");
-		
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(dirt, 0, 0, 600, 300, this);
-		
-		Graphics2D g3 = (Graphics2D) g;
-		g3.drawImage(dirt, 0, 670, 600, 300, this);
-		
-		Graphics2D g4 = (Graphics2D) g;
-		g4.drawImage(water, 0, 300, 600, 370, this);
 	}
 
 	
@@ -77,13 +64,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint1(Graphics g) {
 
 		super.paintComponent(g);
-		
-		//for(Piggy p: pigs) {
-		//	p.paint(g);
-		//}
-		
-		//call upon the paint method of the object
-		//piggy.paint(g);
 			
 		
 		
@@ -114,7 +94,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public Driver() {
 		JFrame f = new JFrame();
 		f.setTitle("Flappy");
-		f.setSize(1600, 900);
+		f.setSize(800, 600);
 		f.setResizable(false);
 		f.addKeyListener(this);
 
