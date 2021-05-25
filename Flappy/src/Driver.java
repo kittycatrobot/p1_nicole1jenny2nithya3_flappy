@@ -26,22 +26,46 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	private Image dirt = null;
-	private Image water = null;
+	//Froggy froggy;
+	//Piggy piggy;
+
+	
+	//create in a row and display them
+	Obstacle o = new Obstacle(100, 200, 100, 400 );
+	//Piggy pigs[] = new Piggy[3];
+
+	public static void main(String[] arg) {
+		Driver d = new Driver();
+	
+	}
+
+	
+	Font big = new Font("Courier New", 1, 50);
+	Font font2 = new Font("Courier New", 1, 30);
+	Font biggest = new Font("Courier New", 1, 80);
+	
+	
+	// ****************************paint
+	// method******************************************
+	
+
+	private Image city = null;
+	private Image sunset = null;
+	int level = 1;
 	
 	public void paint(Graphics g) {
 		this.setSize(1600, 900);
-		dirt = getImage("mcdirt.png");
-		water = getImage("mcwater.png");
+		city = getImage("City.jpg");
+		sunset = getImage("sunset.png");
+		if(level==0) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(city, 0, 0, 1600, 900, this);
+		}
+		if(level==1) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(sunset, 0, 0, 1600, 900, this);
+		}
 		
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(dirt, 0, 0, 600, 300, this);
-		
-		Graphics2D g3 = (Graphics2D) g;
-		g3.drawImage(dirt, 0, 670, 600, 300, this);
-		
-		Graphics2D g4 = (Graphics2D) g;
-		g4.drawImage(water, 0, 300, 600, 370, this);
 	}
 
 	
@@ -49,31 +73,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			//URL imageURL = Froggy.class.getResource(path);
-			//tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+			URL imageURL = Obstacle.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return tempImage;
 	}
 	
-	
-
-	
-	
-	//Froggy froggy;
-	//Piggy piggy;
-
-	
-	//create 10 frogs in a row and display them
-	//Piggy pigs[] = new Piggy[3];
-
-	
-	Font big = new Font("Courier New", 1, 50);
-	Font font2 = new Font("Courier New", 1, 30);
-	Font biggest = new Font("Courier New", 1, 80);
-	// ****************************paint
-	// method******************************************
 	public void paint1(Graphics g) {
 
 		super.paintComponent(g);
@@ -81,7 +88,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//for(Piggy p: pigs) {
 		//	p.paint(g);
 		//}
-		
+		g.drawRect(100, 1000, 200, 600);
+		o.paint(g);
+		g.setColor(Color.black);
 		//call upon the paint method of the object
 		//piggy.paint(g);
 			
@@ -90,7 +99,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//call upon the paint method of the object
 		//froggy.paint(g);
 			
-		
 		
 
 	}
@@ -103,10 +111,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void actionPerformed(ActionEvent arg0) {
 		update();
 		repaint();
-	}
-
-	public static void main(String[] arg) {
-		Driver d = new Driver();
 	}
 
 	
@@ -129,6 +133,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setVisible(true);
 	}
 
+	
 	
 	
 	
