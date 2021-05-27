@@ -86,12 +86,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 
 	public static void main(String[] arg) {
-		Driver d = new Driver();
+		Frame f = new Frame();
 	}
 
 	
 	
-	public Driver() {
+	public Frame() {
 		JFrame f = new JFrame();
 		f.setTitle("Flappy");
 		f.setSize(800, 600);
