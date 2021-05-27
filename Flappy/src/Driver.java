@@ -26,17 +26,23 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	//Froggy froggy;
-	//Piggy piggy;
+	Bird bird;
 
 	
+	
+	
 	//create in a row and display them
-	Obstacle o = new Obstacle(100, 200, 100, 400 );
+	
 	//Piggy pigs[] = new Piggy[3];
 
 	public static void main(String[] arg) {
 		Driver d = new Driver();
-	
+		
+		ArrayList<Obstacle> o = new ArrayList<Obstacle>();
+		for(int i=0; i<7; i++) {
+			int l = (int)(Math.random()*400)+300;
+			o.add(new Obstacle(100, 200, 100, l ));
+		}
 	}
 
 	
@@ -47,27 +53,34 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	
 	// ****************************paint
 	// method******************************************
-	
+	Obstacle o = new Obstacle(100, 200, 100, 400);
 
 	private Image city = null;
 	private Image sunset = null;
 	int level = 1;
 	
 	public void paint(Graphics g) {
+		
 		this.setSize(1600, 900);
 		city = getImage("City.jpg");
 		sunset = getImage("sunset.png");
+		
 		if(level==0) {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.drawImage(city, 0, 0, 1600, 900, this);
 		}
 		if(level==1) {
 			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(sunset, 0, 0, 1600, 900, this);
+			g2.drawImage(sunset, 0, 0, 1300, 700, this);
 		}
 		
+		for(int i=0; i<7; i++) {
+			o.get(i).paint(g);
+		}
 	}
 
+	
+	
 	
 	// converts image to make it drawable in paint
 	private Image getImage(String path) {
@@ -88,9 +101,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//for(Piggy p: pigs) {
 		//	p.paint(g);
 		//}
-		g.drawRect(100, 1000, 200, 600);
-		o.paint(g);
-		g.setColor(Color.black);
+		
 		//call upon the paint method of the object
 		//piggy.paint(g);
 			
