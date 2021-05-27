@@ -19,3 +19,5 @@ public class coin {
 	public coin("pixil-frame-0(1).png") {
 		
 	}
+}
+}
