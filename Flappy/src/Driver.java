@@ -25,7 +25,7 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	Bird bird;
+	Bird bird = new Bird();
 	static ArrayList<Obstacle> o = new ArrayList<Obstacle>();
 
 
@@ -36,26 +36,31 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	
 
 
-	private Image city = null;
+	private Image ocean = null;
 	private Image sunset = null;
+	private Image mountain = null;
 	private Image score = null;
-	int level = 1;
+	
 	
 	public void paint(Graphics g) {
 		
 		this.setSize(1600, 900);
-		city = getImage("City.jpg");
+		ocean = getImage("ocean.png");
 		sunset = getImage("sunset.png");
+		mountain = getImage("mountain.png");
 		
-		if(level==0) {
+		if(bird.getLevel()==0) {
 			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(city, 0, 0, 1600, 900, this);
+			g2.drawImage(ocean, 0, 0, 1275, 695, this);
 		}
-		if(level==1) {
+		if(bird.getLevel()==1) {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.drawImage(sunset, 0, 0, 1300, 700, this);
 		}
-		
+		if(bird.getLevel()==0) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(mountain, 0, 0, 1300, 650, this);
+		}
 
 		
 		

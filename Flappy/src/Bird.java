@@ -6,6 +6,8 @@ public class Bird {
 	private int vx, vy;
 	private int width;
 	private int height;
+	public int level;
+	private boolean gameOver;
 	
 	private Image img;
 	
@@ -18,6 +20,15 @@ public class Bird {
 		
 		width = 50;
 		height = 50;
+		gameOver = false;
+		level = 0;
 	
+	}
+	
+	public int getLevel() {
+		if(gameOver) {
+			level++;
+		}
+		return level;
 	}
 }
