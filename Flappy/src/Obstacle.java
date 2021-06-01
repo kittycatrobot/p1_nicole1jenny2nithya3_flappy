@@ -20,7 +20,7 @@ public class Obstacle {
 	}
 	
 	public void paint(Graphics g) {
-		g.fillRoundRect(x, length, width, length, 10, 10);
+		g.fillRect(100, 1000, width, length);
 	}
 	
 	public int collide(int vx, int x, int y, int w) {
@@ -40,8 +40,5 @@ public class Obstacle {
 		}
 	}
 
-	public Window get(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

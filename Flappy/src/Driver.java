@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -27,36 +26,19 @@ import java.awt.geom.AffineTransform;
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	Bird bird;
+	static ArrayList<Obstacle> o = new ArrayList<Obstacle>();
 
-	
-	
-	
-	//create in a row and display them
-	
-	//Piggy pigs[] = new Piggy[3];
-
-	public static void main(String[] arg) {
-		Driver d = new Driver();
-		
-		ArrayList<Obstacle> o = new ArrayList<Obstacle>();
-		for(int i=0; i<7; i++) {
-			int l = (int)(Math.random()*400)+300;
-			o.add(new Obstacle(100, 200, 100, l ));
-		}
-	}
 
 	
 	Font big = new Font("Courier New", 1, 50);
 	Font font2 = new Font("Courier New", 1, 30);
 	Font biggest = new Font("Courier New", 1, 80);
 	
-	
-	// ****************************paint
-	// method******************************************
-	Obstacle o = new Obstacle(100, 200, 100, 400);
+
 
 	private Image city = null;
 	private Image sunset = null;
+	private Image score = null;
 	int level = 1;
 	
 	public void paint(Graphics g) {
@@ -74,12 +56,36 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g2.drawImage(sunset, 0, 0, 1300, 700, this);
 		}
 		
-		for(int i=0; i<7; i++) {
-			o.get(i).paint(g);
+
+		
+		
+		for(Obstacle ob: o) {
+			ob.paint(g);
 		}
+		
 	}
 
+
+	public void paint1(Graphics g) {
+
+		score = getImage("pixil-frame-0(14).png");
+		
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(score, 1500, 0, 50, 50, this);
 	
+	}
+	
+
+	public static void main(String[] arg) {
+		Driver d = new Driver();
+		for(int i=0; i<7; i++) {
+			int l = (int)(Math.random()*400)+300;
+			o.add(new Obstacle(100, 200, 100, l ));
+			
+		}
+	
+	}	
 	
 	
 	// converts image to make it drawable in paint
@@ -94,26 +100,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		return tempImage;
 	}
 	
-	public void paint1(Graphics g) {
 
-		super.paintComponent(g);
-		
-		//for(Piggy p: pigs) {
-		//	p.paint(g);
-		//}
-		
-		//call upon the paint method of the object
-		//piggy.paint(g);
-			
-		
-		
-		//call upon the paint method of the object
-		//froggy.paint(g);
-			
-		
-
-	}
-
+	
 	public void update() {
 
 	}
