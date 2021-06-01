@@ -48,12 +48,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	
 	
-	//Froggy froggy;
-	//Piggy piggy;
-
-	
-	//create 10 frogs in a row and display them
-	//Piggy pigs[] = new Piggy[3];
 
 	
 	Font big = new Font("Courier New", 1, 50);
@@ -67,8 +61,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			
 		
 		
-		//call upon the paint method of the object
-		//froggy.paint(g);
+	
 			
 		
 		
