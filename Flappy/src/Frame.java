@@ -40,9 +40,20 @@ public class Frame {
 				  if(polescrossed == 10 ) {
 					  background switch thing;
 				  }
+				  if( poles corssed == 20) {
+					  switch to a diffeent background
+					  
+				  }
+				  if( poles crossed == 30) {
+					  then switch to a win screen background
+				  }
 				  else {
 					  background remains the same, so no changes
 				  }
 	   
+				  
+				  public void music() {
+					  
+				  }
 }
 }
