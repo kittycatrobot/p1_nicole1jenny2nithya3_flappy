@@ -14,10 +14,13 @@ public class FrameTwo {
         x = screenwidth/2;
         y = screenlength/2;
         vx = vy = 0;
+        //basically show a game over screen
+        //and show the score on the score card
         
     }
 	  public boolean paused() {
 	        return paused;
 	    }
+	  
 }
 //make sure when the pause button is clicked again u can resume playing, i just dont know how to add it

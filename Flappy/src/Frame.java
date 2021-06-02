@@ -21,7 +21,7 @@ public class Frame {
 			   g.drawString(""+Score,textX,);
 			 
 			   //add variables for paddles!
-			   
+			   int pole = 0; //for counting poles
 			   if (bird <= pole)
 				  {
 					  //game ends
@@ -29,13 +29,20 @@ public class Frame {
 				  
 				  if (bird != pole) {
 					  score++;
+					  pole++;
 				  }
 				  
 				  if (bird == coin) {
 					  score = score + 5;
 				  }
 				  
-			   
+				  
+				  if(polescrossed == 10 ) {
+					  background switch thing;
+				  }
+				  else {
+					  background remains the same, so no changes
+				  }
 	   
 }
 }
