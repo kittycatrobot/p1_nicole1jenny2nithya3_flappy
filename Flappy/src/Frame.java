@@ -7,7 +7,7 @@ public class Frame {
 	
 	
 	int score = 0;
-	
+	  int pole = 0; //for counting poles
 	   int count = 0; //for displaying a countofcoins
 	   Font Verdana = new Font("Verdana", Font.BOLD,40);
 		int textX = 100;
@@ -21,19 +21,22 @@ public class Frame {
 			   g.drawString(""+Score,textX,);
 			 
 			   //add variables for paddles!
-			   int pole = 0; //for counting poles
+			 
 			   if (bird <= pole)
 				  {
+				   //play die sound
 					  //game ends
 				  }
 				  
 				  if (bird != pole) {
+					  play point audio!
 					  score++;
 					  pole++;
 				  }
 				  
 				  if (bird == coin) {
 					  score = score + 5;
+					  //play point audio
 				  }
 				  
 				  
@@ -53,7 +56,12 @@ public class Frame {
 	   
 				  
 				  public void music() {
-					  
+					  ContinuousAudioDataStream loop = null;
+			            try {
+			                backgroundMusic = new AudioStream(new FileInputStream("musicfile"));
+			                musicData = backgroundMusic.getData();
+			                loop = new ContinuousAudioDataStream(musicData);
+			                musicPlayer.start(loop);
 				  }
 }
 }
