@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Window;
 
@@ -20,7 +21,8 @@ public class Obstacle {
 	}
 	
 	public void paint(Graphics g) {
-		g.fillRect(100, 1000, width, length);
+		g.fillRect(100, 1000, 1000, 1000);
+		g.drawRect(100, 100, 200, 200);
 	}
 	
 	public int collide(int vx, int x, int y, int w) {

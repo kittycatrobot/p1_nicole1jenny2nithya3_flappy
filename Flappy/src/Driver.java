@@ -26,8 +26,33 @@ import java.awt.geom.AffineTransform;
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	Bird bird = new Bird();
-	static ArrayList<Obstacle> o = new ArrayList<Obstacle>();
+	ArrayList<Obstacle> o;
 
+
+	public Driver() {
+		JFrame f = new JFrame();
+		f.setTitle("Flappy");
+		f.setSize(1600, 900);
+		f.setResizable(false);
+		f.addKeyListener(this);
+
+		//set up objects and arrays here
+	
+	
+		f.addMouseListener(this);
+		f.add(this);
+		t = new Timer(17, this);
+		t.start();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+		
+		o = new ArrayList<Obstacle>();
+		for(int i=0; i<7; i++) {
+			int l = (int)(Math.random()*200)+200;
+			o.add(new Obstacle(100, 200, 100, l ));
+			
+		}
+	}
 
 	
 	Font big = new Font("Courier New", 1, 50);
@@ -35,7 +60,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font biggest = new Font("Courier New", 1, 80);
 	
 
-
+	private Image grass = null;
 	private Image ocean = null;
 	private Image sunset = null;
 	private Image mountain = null;
@@ -43,52 +68,53 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	
 	
 	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g; 
 		
 		this.setSize(1600, 900);
+		grass = getImage("grass.png");
 		ocean = getImage("ocean.png");
 		sunset = getImage("sunset.png");
 		mountain = getImage("mountain.png");
+		score = getImage("pixil-frame-0(14).png");
 		
 		if(bird.getLevel()==0) {
-			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(ocean, 0, 0, 1275, 695, this);
+			g2.drawImage(grass, 0, 0, 1275, 695, this);
 		}
 		if(bird.getLevel()==1) {
-			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(sunset, 0, 0, 1300, 700, this);
+			g2.drawImage(ocean, 0, 0, 1300, 700, this);
 		}
-		if(bird.getLevel()==0) {
-			Graphics2D g2 = (Graphics2D) g;
-			g2.drawImage(mountain, 0, 0, 1300, 650, this);
+		if(bird.getLevel()==2) {
+			g2.drawImage(mountain, 0, 0, 1300, 700, this);
+		}
+		if(bird.getLevel()==3) {
+			g2.drawImage(sunset, 0, 0, 1275, 695, this);
 		}
 
 		
-		
-		for(Obstacle ob: o) {
-			ob.paint(g);
-		}
+		g2.drawImage(score, 1500, 0, 50, 50, this);
 		
 	}
 
 
 	public void paint1(Graphics g) {
-
-		score = getImage("pixil-frame-0(14).png");
 		
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(score, 1500, 0, 50, 50, this);
+		
+		
+		for(Obstacle ob: o) {
+			ob.paint(g);
+		}  
+		
+		for(int i =0; i<o.size(); i++) {
+			o.get(i).paint(g);
+		}
 	
 	}
 	
 
 	public static void main(String[] arg) {
 		Driver d = new Driver();
-		for(int i=0; i<7; i++) {
-			int l = (int)(Math.random()*400)+300;
-			o.add(new Obstacle(100, 200, 100, l ));
-			
-		}
 	
 	}	
 	
@@ -118,24 +144,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 
 	
-	
-	public Driver() {
-		JFrame f = new JFrame();
-		f.setTitle("Flappy");
-		f.setSize(1600, 900);
-		f.setResizable(false);
-		f.addKeyListener(this);
-
-		//set up objects and arrays here
-	
-	
-		f.addMouseListener(this);
-		f.add(this);
-		t = new Timer(17, this);
-		t.start();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
-	}
 
 	
 	
