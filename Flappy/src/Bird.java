@@ -19,19 +19,20 @@ public class Bird {
 	private Image img;
 	
 	public Bird() {
-		x = 300;
-		y = 100;
+		x = 100;
+		y = 200;
 		
 		vx = 0;
 		vy = y;
 		
-		width = 50;
-		height = 50;
+		width = 100;
+		height = 100;
 		gameOver = false;
 		level = 0;
-		img = getImage("Bird.png");
+		img = getImage("bird.png");
 	
 	}
+	
 	
 	public int getLevel() {
 		if(gameOver) {
@@ -41,17 +42,21 @@ public class Bird {
 	}
 	
 	public void reset() {
-		x = 300;
-		y = 100;
+		x = 100;
+		y = 200;
 	}
 
 
 	public void move() {
-		y -= 50;
-		tx.setToTranslation(x, y);
-
-		y += 50;
-		tx.setToTranslation(x, y);
+		while(y<1600) {
+			y -= 10;
+			tx.setToTranslation(x, y);
+		}
+		if(y>=1600) {
+			gameOver = true;
+		}
+		//y += 50;
+		//tx.setToTranslation(x, y);
 	}
 
 
@@ -61,8 +66,8 @@ public class Bird {
 	// draw the affine transform
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		move(); //ask frog to update its location variables
-		g2.drawImage(img, tx, null);
+		move(); //ask bird to update its location variables
+		g2.drawImage(img, x, y, width, height, null);
 
 	}
 

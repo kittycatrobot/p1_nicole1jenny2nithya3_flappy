@@ -25,20 +25,20 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	Bird bird = new Bird();
+	//object declarations
+	Bird bird;
 	ArrayList<Obstacle> o;
 
 
 	public Driver() {
+		
+		//frame setup
 		JFrame f = new JFrame();
 		f.setTitle("Flappy");
 		f.setSize(1600, 900);
 		f.setResizable(false);
 		f.addKeyListener(this);
 
-		//set up objects and arrays here
-	
-	
 		f.addMouseListener(this);
 		f.add(this);
 		t = new Timer(17, this);
@@ -46,11 +46,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
+		
+		//instantiations and arrays
 		o = new ArrayList<Obstacle>();
+		bird = new Bird();
+		
+		int x = 100;
 		for(int i=0; i<7; i++) {
 			int l = (int)(Math.random()*200)+200;
-			o.add(new Obstacle(100, 200, 100, l ));
-			
+			x+=200;
+			o.add(new Obstacle(x, 900-200-l, 100, l ));
+			o.add(new Obstacle(x, 0, 100, 900-l-450));
 		}
 	}
 
@@ -59,7 +65,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Font font2 = new Font("Courier New", 1, 30);
 	Font biggest = new Font("Courier New", 1, 80);
 	
-
+	//background & images
 	private Image grass = null;
 	private Image ocean = null;
 	private Image sunset = null;
@@ -68,6 +74,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	
 	
 	public void paint(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g; 
 		
 		this.setSize(1600, 900);
@@ -75,7 +82,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		ocean = getImage("ocean.png");
 		sunset = getImage("sunset.png");
 		mountain = getImage("mountain.png");
-		score = getImage("pixil-frame-0(14).png");
+		score = getImage("score.png");
 		
 		if(bird.getLevel()==0) {
 			g2.drawImage(grass, 0, 0, 1275, 695, this);
@@ -90,27 +97,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g2.drawImage(sunset, 0, 0, 1275, 695, this);
 		}
 
-		
-		g2.drawImage(score, 1500, 0, 50, 50, this);
-		
-	}
-
-
-	public void paint1(Graphics g) {
-		
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		
-		
+		//g2.fillRect(100, 100, 1000, 100);
 		for(Obstacle ob: o) {
-			ob.paint(g);
+			ob.paint(g2);
 		}  
 		
-		for(int i =0; i<o.size(); i++) {
-			o.get(i).paint(g);
-		}
-	
+		
+		g2.drawImage(score, 1500, 0, 50, 50, this);
+		bird.paint(g2);
+		
 	}
+
 	
 
 	public static void main(String[] arg) {
@@ -137,6 +134,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
