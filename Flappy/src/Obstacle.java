@@ -16,19 +16,23 @@ public class Obstacle {
 	public Color c;
 	private Image pole;
 	
-	public Obstacle(int x, int y, int width, int length) {
+	public Obstacle(int x, int y, int width, int length, Boolean isTop) {
 		this.x=x;
 		this.y=y;
 		this.width=width;
 		this.length=length;
-		pole = getImage("redpoleobstacle.png");
+		if(isTop) {
+			pole = getImage("image.png");
+		}else {
+			pole = getImage("pole.png");
+		}
+		
 	}
 	
+	
+	
 	public void paint(Graphics g) {
-		//Graphics2D g2 = (Graphics2D) g;
-		//g.setColor(c.cyan);
-		//g.fillRect(100, 1000, 1000, 1000);
-		g.drawRect(x, y, width, length);
+		g.drawImage(pole, x, y, null);
 	}
 	
 	public int collide(int vx, int x, int y, int w) {

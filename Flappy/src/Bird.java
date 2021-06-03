@@ -53,7 +53,7 @@ public class Bird {
 			tx.setToTranslation(x, y);
 		}
 		if(y>=1600) {
-			gameOver = true;
+			//gameOver = true;
 		}
 		//y += 50;
 		//tx.setToTranslation(x, y);
@@ -66,8 +66,9 @@ public class Bird {
 	// draw the affine transform
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		move(); //ask bird to update its location variables
+		
 		g2.drawImage(img, x, y, width, height, null);
+		move(); //ask bird to update its location variables
 
 	}
 

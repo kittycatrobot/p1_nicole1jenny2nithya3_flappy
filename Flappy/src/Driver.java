@@ -27,7 +27,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	//object declarations
 	Bird bird;
-	ArrayList<Obstacle> o;
+	ArrayList<Obstacle> top;
+	ArrayList<Obstacle> bottom;
+	int level;
 
 
 	public Driver() {
@@ -48,16 +50,116 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		
 		//instantiations and arrays
-		o = new ArrayList<Obstacle>();
+		top = new ArrayList<Obstacle>();
+		bottom = new ArrayList<Obstacle>();
 		bird = new Bird();
+		level = 3;//bird.getLevel();
 		
-		int x = 100;
-		for(int i=0; i<7; i++) {
-			int l = (int)(Math.random()*200)+200;
-			x+=200;
-			o.add(new Obstacle(x, 900-200-l, 100, l ));
-			o.add(new Obstacle(x, 0, 100, 900-l-450));
+		
+		//level 1
+		if(level==0) {
+			int x = 100;
+			int prev = 300;
+			for(int i=0; i<3; i++) {
+				int l = (int)(Math.random()*200)+200;
+				
+				//makes sure that obstacles are not too far apart
+				while(Math.abs(l-prev)>130) {
+					l = (int)(Math.random()*200)+200;
+				}
+				prev = l;
+				
+				x+=250;
+				bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
+				top.add(new Obstacle(x, -300-l, 100, l, true));
+			}
 		}
+		
+		//level 2
+		if(level==1) {
+			//clear previous lvl obstacles
+			for(Obstacle ob: top) {
+				top.remove(ob);
+			}
+			for(Obstacle ob: bottom) {
+				top.remove(ob);
+			}
+			
+			//new obstacles
+			int x=0;
+			int prev = 300;
+			for(int i=0; i<4; i++) {
+				int l = (int)(Math.random()*200)+200;
+
+				//makes sure that obstacles are not too far apart
+				while(Math.abs(l-prev)>130) {
+					l = (int)(Math.random()*200)+200;
+				}
+				prev = l;
+				
+				x+=250;
+				bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
+				top.add(new Obstacle(x, -300-l, 100, l, true));
+			}
+		}
+		
+				//level 3
+				if(level==2) {
+					//clear previous lvl obstacles
+					for(Obstacle ob: top) {
+						top.remove(ob);
+					}
+					for(Obstacle ob: bottom) {
+						top.remove(ob);
+					}
+					
+					//new obstacles
+					int x=0;
+					int prev = 300;
+					for(int i=0; i<5; i++) {
+						int l = (int)(Math.random()*200)+200;
+						
+						//makes sure that obstacles are not too far apart
+						while(Math.abs(l-prev)>130) {
+							l = (int)(Math.random()*200)+200;
+						}
+						prev = l;
+						
+						x+=200;
+						bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
+						top.add(new Obstacle(x, -300-l, 100, l, true));
+					}
+				}
+				
+				
+				//level 4
+				if(level==3) {
+					//clear previous lvl obstacles
+					for(Obstacle ob: top) {
+						top.remove(ob);
+					}
+					for(Obstacle ob: bottom) {
+						top.remove(ob);
+					}
+					
+					//new obstacles
+					int x=0;
+					int prev = 300;
+					for(int i=0; i<6; i++) {
+						int l = (int)(Math.random()*200)+200;
+						
+						//makes sure that obstacles are not too far apart
+						while(Math.abs(l-prev)>130) {
+							l = (int)(Math.random()*200)+200;
+						}
+						prev = l;
+						
+						x+=175;
+						bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
+						top.add(new Obstacle(x, -300-l, 100, l, true));
+					}
+				}
+		
 	}
 
 	
@@ -84,26 +186,29 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		mountain = getImage("mountain.png");
 		score = getImage("score.png");
 		
-		if(bird.getLevel()==0) {
+		if(level==0) {
 			g2.drawImage(grass, 0, 0, 1275, 695, this);
 		}
-		if(bird.getLevel()==1) {
+		if(level==1) {
 			g2.drawImage(ocean, 0, 0, 1300, 700, this);
 		}
-		if(bird.getLevel()==2) {
+		if(level==2) {
 			g2.drawImage(mountain, 0, 0, 1300, 700, this);
 		}
-		if(bird.getLevel()==3) {
+		if(level==3) {
 			g2.drawImage(sunset, 0, 0, 1275, 695, this);
 		}
 
 		//g2.fillRect(100, 100, 1000, 100);
-		for(Obstacle ob: o) {
+		for(Obstacle ob: top) {
+			ob.paint(g2);
+		}  
+		for(Obstacle ob: bottom) {
 			ob.paint(g2);
 		}  
 		
-		
-		g2.drawImage(score, 1500, 0, 50, 50, this);
+		//g.drawRect(500, 500, 100, 100);
+		g2.drawImage(score, 1500, 100, 50, 50, this);
 		bird.paint(g2);
 		
 	}
