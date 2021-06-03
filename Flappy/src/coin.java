@@ -17,7 +17,11 @@ public class coin {
 }
 	
 	public coin("pixil-frame-0(1).png") {
-		
+		for(int i = 0; i < 15;i++) {
+			//randomize placements of the coins (x,y coordinates) 
+			// and randomly place coins
 	}
+	
+	
 }
 }

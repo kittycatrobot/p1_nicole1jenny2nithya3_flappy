@@ -62,6 +62,7 @@ public class Frame {
 			                musicData = backgroundMusic.getData();
 			                loop = new ContinuousAudioDataStream(musicData);
 			                musicPlayer.start(loop);
+			                //get backgound music
 				  }
 }
 }
