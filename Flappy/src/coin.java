@@ -5,9 +5,9 @@ import java.awt.Image;
 public class coin {
 
 	private int x, y;
-	private int vx, vy;
-	private int width;
-	private int height;
+	private int width;//not completly sure
+	
+	private int height;//not completly sure
 	
 	private Image img;
 	
