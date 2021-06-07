@@ -37,8 +37,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//frame setup
 		JFrame f = new JFrame();
 		f.setTitle("Flappy");
-		f.setSize(1600, 900);
-		f.setResizable(false);
+		f.setSize(1600, 700);
+		f.setResizable(true);
 		f.addKeyListener(this);
 
 		f.addMouseListener(this);
@@ -53,7 +53,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		top = new ArrayList<Obstacle>();
 		bottom = new ArrayList<Obstacle>();
 		bird = new Bird();
-		level = 3;//bird.getLevel();
+		level = 0;//bird.getLevel();
 		
 		
 		//level 1
@@ -179,7 +179,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g; 
 		
-		this.setSize(1600, 900);
+		this.setSize(1600, 700);
 		grass = getImage("grass.png");
 		ocean = getImage("ocean.png");
 		sunset = getImage("sunset.png");

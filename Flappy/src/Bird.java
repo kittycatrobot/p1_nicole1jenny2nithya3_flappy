@@ -15,15 +15,16 @@ public class Bird {
 	private int height;
 	public int level;
 	private boolean gameOver;
+	private boolean win;
 	
 	private Image img;
 	
 	public Bird() {
-		x = 100;
-		y = 200;
+		x = 70;
+		y = 250;
 		
-		vx = 0;
-		vy = y;
+		vx = 1;
+		vy = 1;
 		
 		width = 100;
 		height = 100;
@@ -36,26 +37,26 @@ public class Bird {
 	
 	public int getLevel() {
 		if(gameOver) {
-			level++;
+			//level++;
 		}
 		return level;
 	}
 	
 	public void reset() {
-		x = 100;
-		y = 200;
+		x = 70;
+		y = 250;
 	}
 
 
 	public void move() {
-		while(y<1600) {
-			y -= 10;
-			tx.setToTranslation(x, y);
+		
+		
+		
+		if(y<=600 && y>=0) {
+			y += vy;
+			x += vx;
+			gameOver = true;
 		}
-		if(y>=1600) {
-			//gameOver = true;
-		}
-		//y += 50;
 		//tx.setToTranslation(x, y);
 	}
 
