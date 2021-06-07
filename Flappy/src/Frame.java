@@ -5,7 +5,7 @@ public class Frame {
 
 	
 	
-	
+	/*
 	int score = 0;
 	  int pole = 0; //for counting poles
 	   int count = 0; //for displaying a countofcoins
@@ -14,8 +14,8 @@ public class Frame {
 		public void paint(Graphics g) {
 			   super.paintComponent(g); //do not remove
 			   /*paint method runs roughly 60x per seconed 
-			    * 
-			    */
+			    
+			
 			   g.setFont(Verdana);
 			   //drawing test on the lock screen + using varibles
 			   g.drawString(""+Score,textX,);
@@ -39,6 +39,7 @@ public class Frame {
 					  //play point audio
 				  }
 				  
+<<<<<<< HEAD
 				  
 				  if(polescrossed == 10 ) {
 					  background switch thing;
@@ -53,16 +54,7 @@ public class Frame {
 				  else {
 					  background remains the same, so no changes
 				  }
-	   
-				  
-				  public void music() {
-					  ContinuousAudioDataStream loop = null;
-			            try {
-			                backgroundMusic = new AudioStream(new FileInputStream("musicfile"));
-			                musicData = backgroundMusic.getData();
-			                loop = new ContinuousAudioDataStream(musicData);
-			                musicPlayer.start(loop);
-			                //get backgound music
-				  }
-}
+=======
+			 */  
+\
 }
