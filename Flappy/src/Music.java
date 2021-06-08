@@ -79,7 +79,7 @@ public class Music  implements Runnable  {
 		try {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
-	        DataLine.Info info = new DataLine.Info(Clip.class, format);
+	        DataLine.Info info = new DataLin    o(Clip.class, format);
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
 	        audioClip.start();
@@ -91,11 +91,10 @@ public class Music  implements Runnable  {
 			e.printStackTrace();
 		}
 	}	  
-	//*
+	
 //	  public void music() {
 	//	  ContinuousAudioDataStream loop = null;
-     //       try {
-    //            backgroundMusic = new AudioStream(new FileInputStream("musicfile"));
+     //       try {5hroundMusic = new AudioStream(new FileInputStream("musicfile"));
      //           musicData = backgroundMusic.getData();
      //           loop = new ContinuousAudioDataStream(musicData);
     //            musicPlayer.start(loop);
