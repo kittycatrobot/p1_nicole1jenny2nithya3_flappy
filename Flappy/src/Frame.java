@@ -39,7 +39,7 @@ public class Frame {
 					  //play point audio
 				  }
 				  
-<<<<<<< HEAD
+
 				  
 				  if(polescrossed == 10 ) {
 					  background switch thing;
@@ -54,7 +54,7 @@ public class Frame {
 				  else {
 					  background remains the same, so no changes
 				  }
-=======
+
 			 */  
-\
+
 }

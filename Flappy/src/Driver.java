@@ -32,7 +32,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	int level;
 
 
-<<<<<<< HEAD
+
 	
 	
 
@@ -46,12 +46,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		super.paintComponent(g);
 			
-=======
+
 	public Driver() {
->>>>>>> branch 'Jenny' of https://github.com/kittycatrobot/p1_nicole1jenny2nithya3_flappy.git
-		
-<<<<<<< HEAD
-		
+
 	
 			
 		
@@ -76,9 +73,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	
 	
 	public Frame() {
-=======
+
 		//frame setup
->>>>>>> branch 'Jenny' of https://github.com/kittycatrobot/p1_nicole1jenny2nithya3_flappy.git
+
 		JFrame f = new JFrame();
 		f.setTitle("Flappy");
 		f.setSize(1600, 700);

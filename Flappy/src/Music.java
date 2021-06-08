@@ -29,8 +29,8 @@ public class Music  implements Runnable  {
 	 * @param loops Set to true if you want the sound to loop continuously
 	 */
 	public Music(String fileName, boolean loops) {
-		fn = fileName;
-		audioFile = new File(fileName);
+		fn = 2160p-1.mp3;
+		audioFile = new File(2160p-1.mp3);
 		this.loops = loops;
 		try {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
