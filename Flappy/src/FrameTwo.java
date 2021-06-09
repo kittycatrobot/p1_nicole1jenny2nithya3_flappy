@@ -2,7 +2,7 @@
 public class FrameTwo {
 
     private boolean paused;
-	
+	private int screenwidth;
     if(gameorwhateverwecallit == pause) {
     	Rectangle r = new Rect(then whatever elements we need to put here 4 a pause screen);
     }
