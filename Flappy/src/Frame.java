@@ -1,10 +1,24 @@
 import java.awt.Font;
 import java.awt.Graphics;
 
+import frog.Background;
+import frog.Death;
+import frog.Music;
+
 public class Frame {
 
-	
-	
+	//ADD THIS TO THE DRIVER 
+	// Set background and music
+		Background background = new Background();
+		Music soundBackground = new Music("2160p-1.mp3", true);
+		Death death  = new Death();
+		Music soundDeath = new Music("die.mp3", true);
+		Point pount = new Point();
+		Music pointSound = new Music("point.mp3",true);
+		Hit hit = new Hit();
+		Music hitSound = new Music("hit.mp3",true);
+		Wing wing = new Wing();
+		Music wingSound = new Music("wing.mp3",true);
 	/*
 	int score = 0;
 	  int pole = 0; //for counting poles

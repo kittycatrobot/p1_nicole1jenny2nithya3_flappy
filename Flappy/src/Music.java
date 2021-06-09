@@ -13,32 +13,23 @@ import javax.sound.sampled.LineListener;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Music  implements Runnable  {
-	
-	private Thread t;
-	private File audioFile ;
-	private AudioInputStream audioStream;
-	private Clip audioClip;
-	private String fn;
-	private boolean loops = false;
-	
-	/**
-	 * Create a music object from a given file name. 
-	 * The music file should be stored outside of the src folder but in the same project.
-	 * 
-	 * @param fileName name of file such as "backgroundmusic.wav"
-	 * @param loops Set to true if you want the sound to loop continuously
-	 */
+	Thread t;
+	File audioFile ;
+    AudioInputStream audioStream;
+    Clip audioClip;
+    String fn;
 	public Music(String fileName, boolean loops) {
-		fn = 2160p-1.mp3;
-		audioFile = new File(2160p-1.mp3);
-		this.loops = loops;
+		fn = fileName;
+		audioFile = new File(fileName);
 		try {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
 	        DataLine.Info info = new DataLine.Info(Clip.class, format);
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        
-	              
+	        if(loops) {
+	        	audioClip.loop(audioClip.LOOP_CONTINUOUSLY);
+	        }	        
 	        audioClip.open(audioStream);
 	        //audioClip.start();
 		} catch (UnsupportedAudioFileException e) {
@@ -50,36 +41,24 @@ public class Music  implements Runnable  {
 		}
 	}
 	
-	/*
-	 * Start the music. If the object was created with loops set to true then
-	 * it will loop otherwise it will be played once. 
-	 */
 	public void play() {
-		//count = 0;
 		start3();
 	}
-	
-	int count = 0;
-	private void start3() {
-		
-	     t = new Thread (this, "run");
-	     if(audioClip.isActive()==false && loops || count == 0) {
-	    	 count++;
-	    	 start2();
-	     }
-	    
-	     t.start();
-	}
-	private void start() {
-	     t = new Thread (this, "run");
+	public void start3() {
+	     t = new Thread (this, fn);
+	     start2();
 	     t.start ();
 	}
-	private void start2() {
+	public void start() {
+	     t = new Thread (this, fn);
+	     t.start ();
+	}
+	public void start2() {
 		audioFile = new File(fn);
 		try {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
-	        DataLine.Info info = new DataLin    o(Clip.class, format);
+	        DataLine.Info info = new DataLine.Info(Clip.class, format);
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
 	        audioClip.start();
@@ -90,21 +69,11 @@ public class Music  implements Runnable  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}	  
-	
-//	  public void music() {
-	//	  ContinuousAudioDataStream loop = null;
-     //       try {5hroundMusic = new AudioStream(new FileInputStream("musicfile"));
-     //           musicData = backgroundMusic.getData();
-     //           loop = new ContinuousAudioDataStream(musicData);
-    //            musicPlayer.start(loop);
-                //get backgound music
-	//  }
+	}
 
 	@Override
 	public void run() {
-		// audioClip.start();
-		play();
+		 audioClip.start();
 	}
 	
 
