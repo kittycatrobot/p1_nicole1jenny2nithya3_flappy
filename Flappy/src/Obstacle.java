@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Obstacle {
 
@@ -30,28 +32,23 @@ public class Obstacle {
 	}
 	
 	
-	
 	public void paint(Graphics g) {
 		g.drawImage(pole, x, y, null);
 	}
 	
-	public int collide(int vx, int x, int y, int w) {
-		Rectangle r = new Rectangle(this.width, this.length);
-		Rectangle bird = new Rectangle(w,w);
-		if(r.intersects(bird)) {
-			return -vx;
-		}
-		return vx;
+	public boolean collide(Bird b) {
+		Rectangle r = new Rectangle(x, y,this.width, this.length);
+		
+		if(b.getRect().intersects(r)) {
+			return true;
+		}return false;
 	}
 	
 	public void oscillate() {
-		int val = (int)Math.random()*(50+1);
-		int curr = y;
-		while(y>0) {
-			y++;
-		}
+		
 	}
 
+	
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {

@@ -29,6 +29,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	Bird bird;
 	ArrayList<Obstacle> top;
 	ArrayList<Obstacle> bottom;
+	ArrayList<Coin> coins;
 	int level;
 
 
@@ -52,12 +53,30 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//instantiations and arrays
 		top = new ArrayList<Obstacle>();
 		bottom = new ArrayList<Obstacle>();
+		coins = new ArrayList<Coin>();
 		bird = new Bird();
-		level = 0;//bird.getLevel();
+		level = bird.getLevel();
+		
+		for(int i=0; i<10; i++) {
+			coins.add(new Coin());
+		}
+		
+		
+		//collision
+		for(int i=0; i<top.size(); i++) {
+			if(top.get(i).collide(bird)) {
+				bird.setVx(0);
+				bird.setVy(0);
+			}
+			if(bottom.get(i).collide(bird)) {
+				bird.setVx(0);
+				bird.setVy(0);
+			}
+		}
 		
 		
 		//level 1
-		if(level==0) {
+		if(bird.getLevel()==0) {
 			int x = 100;
 			int prev = 300;
 			for(int i=0; i<3; i++) {
@@ -76,7 +95,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 		
 		//level 2
-		if(level==1) {
+		if(bird.getLevel()==1) {
 			//clear previous lvl obstacles
 			for(Obstacle ob: top) {
 				top.remove(ob);
@@ -163,10 +182,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 
 	
-	Font big = new Font("Courier New", 1, 50);
-	Font font2 = new Font("Courier New", 1, 30);
-	Font biggest = new Font("Courier New", 1, 80);
 	
+	Font font = new Font("VERDANA", 1, 50);
+
+
 	//background & images
 	private Image grass = null;
 	private Image ocean = null;
@@ -186,6 +205,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		mountain = getImage("mountain.png");
 		score = getImage("score.png");
 		
+		
 		if(level==0) {
 			g2.drawImage(grass, 0, 0, 1275, 695, this);
 		}
@@ -199,7 +219,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g2.drawImage(sunset, 0, 0, 1275, 695, this);
 		}
 
-		//g2.fillRect(100, 100, 1000, 100);
+		
+		//paint obstacles
 		for(Obstacle ob: top) {
 			ob.paint(g2);
 		}  
@@ -207,9 +228,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			ob.paint(g2);
 		}  
 		
-		//g.drawRect(500, 500, 100, 100);
-		g2.drawImage(score, 1500, 100, 50, 50, this);
+		g2.drawImage(score, 1100, 50, 130, 130, this);
 		bird.paint(g2);
+		
+		//paint coins
+		for(Coin c: coins) {
+			c.paint(g2);
+		}
+		
+		g.setFont(font);
+		g.setColor(Color.white);
+		
+		g.drawString(""+bird.getScore(), 1140, 140);
 		
 	}
 
@@ -256,7 +286,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//froggy.methodHop();
+		int keyCode = e.getKeyCode();
+		switch(keyCode) {
+			case KeyEvent.VK_SPACE:
+				bird.update();
+				
+		}
 
 	}
 

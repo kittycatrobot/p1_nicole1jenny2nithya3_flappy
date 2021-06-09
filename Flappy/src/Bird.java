@@ -6,16 +6,20 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Bird {
 
-	private int x, y;
+	private int x;
+	private static int y;
 	private int vx, vy;
 	private int width;
 	private int height;
-	public int level;
+	public int level,score;
 	private boolean gameOver;
 	private boolean win;
+
 	
 	private Image img;
 	
@@ -28,36 +32,63 @@ public class Bird {
 		
 		width = 100;
 		height = 100;
+		
 		gameOver = false;
+		win = false;
 		level = 0;
+		score = 0;
+		
 		img = getImage("bird.png");
 	
 	}
 	
 	
 	public int getLevel() {
-		if(gameOver) {
-			//level++;
-		}
+		
 		return level;
 	}
+	
 	
 	public void reset() {
 		x = 70;
 		y = 250;
 	}
 
+	public void update() {
+		int counter = 10;
+		while(counter >=0) {
+			y--;
+			counter--;
+		}
+	}
+	public static void main(String args[]) {
+		/*Timer t = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				y++;
+			}
+		};
+		
+		t.scheduleAtFixedRate(task, 0, 500);
+		*/
+	}
+	
 
 	public void move() {
-		
-		
 		
 		if(y<=600 && y>=0) {
 			y += vy;
 			x += vx;
-			gameOver = true;
+			if(x>1400) {
+				win = true;
+				level++;
+				reset();
+			}
+			if(y>600 || y<0) {
+				reset();
+			}
 		}
-		//tx.setToTranslation(x, y);
+				//tx.setToTranslation(x, y);
 	}
 
 
@@ -116,6 +147,11 @@ public class Bird {
 		this.y = y;
 		tx.setToTranslation(x, y);
 	}
+
+	public int getScore() {
+		return score;
+	}
+	
 
 
 	/* Helper function for collision detection later */
