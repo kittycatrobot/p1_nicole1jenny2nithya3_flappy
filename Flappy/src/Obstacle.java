@@ -37,7 +37,7 @@ public class Obstacle {
 	}
 	
 	public boolean collide(Bird b) {
-		Rectangle r = new Rectangle(x, y,this.width, this.length);
+		Rectangle r = new Rectangle(this.x, this.y,this.width, this.length);
 		
 		if(b.getRect().intersects(r)) {
 			return true;

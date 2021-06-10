@@ -88,7 +88,7 @@ public class Bird {
 				reset();
 			}
 		}
-				//tx.setToTranslation(x, y);
+
 	}
 
 
@@ -143,6 +143,14 @@ public class Bird {
 		return y;
 	}
 
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
 	public void setY(int y) {
 		this.y = y;
 		tx.setToTranslation(x, y);

@@ -62,18 +62,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 		
 		
-		//collision
-		for(int i=0; i<top.size(); i++) {
-			if(top.get(i).collide(bird)) {
-				bird.setVx(0);
-				bird.setVy(0);
-			}
-			if(bottom.get(i).collide(bird)) {
-				bird.setVx(0);
-				bird.setVy(0);
-			}
-		}
-		
+	
 		
 		//level 1
 		if(bird.getLevel()==0) {
@@ -93,6 +82,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				top.add(new Obstacle(x, -300-l, 100, l, true));
 			}
 		}
+		
+		//collision
+		for(Obstacle t: top) {
+			if(t.collide(bird)) {
+				bird.setVx(0);
+				bird.setVy(0);
+		for(Obstacle b: bottom){
+			if(b.collide(bird)) {
+				bird.setVx(0);
+				bird.setVy(0);
+			}
+		}
+		
 		
 		//level 2
 		if(bird.getLevel()==1) {
@@ -179,11 +181,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					}
 				}
 		
-	}
-
+	
+			}
 	
 	
-	Font font = new Font("VERDANA", 1, 50);
+		
+		
 
 
 	//background & images
@@ -197,6 +200,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g; 
+		Font font = new Font("VERDANA", 1, 50); 
 		
 		this.setSize(1600, 700);
 		grass = getImage("grass.png");
@@ -205,7 +209,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		mountain = getImage("mountain.png");
 		score = getImage("score.png");
 		
-		
+		//g.drawRect(200, 200,400, 400);
 		if(level==0) {
 			g2.drawImage(grass, 0, 0, 1275, 695, this);
 		}
