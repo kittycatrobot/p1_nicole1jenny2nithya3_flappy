@@ -25,13 +25,24 @@ import java.awt.geom.AffineTransform;
 
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	//object declarations
+//object declarations
 	Bird bird;
 	ArrayList<Obstacle> top;
 	ArrayList<Obstacle> bottom;
 	ArrayList<Coin> coins;
 	int level;
+	Boolean ran1=false;
+	Boolean ran2=false;
+	Boolean ran3=false;
+	Boolean ran4=false;
 
+	//background & images
+		private Image grass = null;
+		private Image ocean = null;
+		private Image sunset = null;
+		private Image mountain = null;
+		private Image score = null;
+		
 
 	public Driver() {
 		
@@ -55,149 +66,158 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		bottom = new ArrayList<Obstacle>();
 		coins = new ArrayList<Coin>();
 		bird = new Bird();
-		level = bird.getLevel();
 		
-		for(int i=0; i<10; i++) {
-			coins.add(new Coin());
-		}
-		
-		
+
 	
-		
-		//level 1
-		if(bird.getLevel()==0) {
-			int x = 100;
-			int prev = 300;
-			for(int i=0; i<3; i++) {
-				int l = (int)(Math.random()*200)+200;
-				
-				//makes sure that obstacles are not too far apart
-				while(Math.abs(l-prev)>130) {
-					l = (int)(Math.random()*200)+200;
-				}
-				prev = l;
-				
-				x+=250;
-				bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
-				top.add(new Obstacle(x, -300-l, 100, l, true));
-			}
-		}
-		
-		//collision
-		for(Obstacle t: top) {
-			if(t.collide(bird)) {
-				bird.setVx(0);
-				bird.setVy(0);
-		for(Obstacle b: bottom){
-			if(b.collide(bird)) {
-				bird.setVx(0);
-				bird.setVy(0);
-			}
-		}
-		
-		
-		//level 2
-		if(bird.getLevel()==1) {
-			//clear previous lvl obstacles
-			for(Obstacle ob: top) {
-				top.remove(ob);
-			}
-			for(Obstacle ob: bottom) {
-				top.remove(ob);
-			}
+	}
 			
-			//new obstacles
-			int x=0;
-			int prev = 300;
-			for(int i=0; i<4; i++) {
-				int l = (int)(Math.random()*200)+200;
+		
+	
+	
+	public void setLvl(Bird b) {
 
-				//makes sure that obstacles are not too far apart
-				while(Math.abs(l-prev)>130) {
-					l = (int)(Math.random()*200)+200;
-				}
-				prev = l;
-				
-				x+=250;
-				bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
-				top.add(new Obstacle(x, -300-l, 100, l, true));
-			}
+		int lvl= b.getLevel();
+		if(lvl%4==0) {
+			lvl1(ran1);
+		}
+		if(lvl%4==1) {
+			lvl2(ran2);
+		}
+		if(lvl%4==2) {
+			lvl3(ran3);
+		}
+		if(lvl%4==3) {
+			lvl4(ran4);
 		}
 		
-				//level 3
-				if(level==2) {
-					//clear previous lvl obstacles
-					for(Obstacle ob: top) {
-						top.remove(ob);
-					}
-					for(Obstacle ob: bottom) {
-						top.remove(ob);
-					}
-					
-					//new obstacles
-					int x=0;
-					int prev = 300;
-					for(int i=0; i<5; i++) {
-						int l = (int)(Math.random()*200)+200;
-						
-						//makes sure that obstacles are not too far apart
-						while(Math.abs(l-prev)>130) {
-							l = (int)(Math.random()*200)+200;
-						}
-						prev = l;
-						
-						x+=200;
-						bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
-						top.add(new Obstacle(x, -300-l, 100, l, true));
-					}
-				}
-				
-				
-				//level 4
-				if(level==3) {
-					//clear previous lvl obstacles
-					for(Obstacle ob: top) {
-						top.remove(ob);
-					}
-					for(Obstacle ob: bottom) {
-						top.remove(ob);
-					}
-					
-					//new obstacles
-					int x=0;
-					int prev = 300;
-					for(int i=0; i<6; i++) {
-						int l = (int)(Math.random()*200)+200;
-						
-						//makes sure that obstacles are not too far apart
-						while(Math.abs(l-prev)>130) {
-							l = (int)(Math.random()*200)+200;
-						}
-						prev = l;
-						
-						x+=175;
-						bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
-						top.add(new Obstacle(x, -300-l, 100, l, true));
-					}
-				}
-		
+	}
 	
+	
+	public void lvl1(Boolean b) {
+		if(!b) {
+			
+			clear();
+		
+		int x = 100;
+		int prev = 300;
+		for(int i=0; i<3; i++) {
+			int l = (int)(Math.random()*200)+200;
+			
+			//makes sure that obstacles are not too far apart
+			while(Math.abs(l-prev)>130) {
+				l = (int)(Math.random()*200)+200;
 			}
+			prev = l;
+			
+			x+=250;
+			bottom.add(new Obstacle(x, 900-100-l, 100, l, false));
+			top.add(new Obstacle(x, -300-l, 100, l, true));
+			coins.add(new Coin(x, 600-l));
+		}
+		}
+		ran1=true;
+	}
 	
-	
+	public void lvl2(boolean b) {
 		
+		if(!b) {
+			//clear previous lvl obstacles
+			clear();
+		
+		//new obstacles
+		int x=0;
+		int prev = 300;
+		for(int i=0; i<4; i++) {
+			int l = (int)(Math.random()*200)+200;
+
+			//makes sure that obstacles are not too far apart
+			while(Math.abs(l-prev)>130) {
+				l = (int)(Math.random()*200)+200;
+			}
+			prev = l;
+			
+			x+=250;
+			bottom.add(new Obstacle(x, 900-150-l, 100, l, false));
+			top.add(new Obstacle(x, -300-l, 100, l, true));
+			coins.add(new Coin(x, 600-l));
+		}
+		}
+		ran2=true;
+	}
+	
+	public void lvl3(boolean b) {
+		if(!b) {
+		//clear previous lvl obstacles
+		clear();
+		
+		//new obstacles
+		int x=0;
+		int prev = 300;
+		for(int i=0; i<5; i++) {
+			int l = (int)(Math.random()*200)+200;
+			
+			//makes sure that obstacles are not too far apart
+			while(Math.abs(l-prev)>130) {
+				l = (int)(Math.random()*200)+200;
+			}
+			prev = l;
+			
+			x+=200;
+			bottom.add(new Obstacle(x, 900-150-l, 100, l, false));
+			top.add(new Obstacle(x, -300-l, 100, l, true));
+			coins.add(new Coin(x, 600-l));
+		}
+		}
+		ran3=true;
+	}
+	
+	public void lvl4(boolean b) {
+		if(!b) {
+		//clear previous lvl obstacles
+		clear();
+		
+		//new obstacles
+		int x=0;
+		int prev = 300;
+		for(int i=0; i<6; i++) {
+			int l = (int)(Math.random()*200)+200;
+			
+			//makes sure that obstacles are not too far apart
+			while(Math.abs(l-prev)>130) {
+				l = (int)(Math.random()*200)+200;
+			}
+			prev = l;
+			
+			x+=175;
+			bottom.add(new Obstacle(x, 900-200-l, 100, l, false));
+			top.add(new Obstacle(x, -300-l, 100, l, true));
+			coins.add(new Coin(x, 600-l));
+		}
+		}
+		ran4=true;
+	}
 		
 
+	public void clear() {
+		//clear previous lvl obstacles
+		for(Obstacle ob: bottom) {
+			bottom.remove(ob);
+		}	
+		for(Obstacle ob: top) {
+			top.remove(ob);
+		}
+		for(Coin c: coins) {
+			coins.remove(c);
+		}
+	}
 
-	//background & images
-	private Image grass = null;
-	private Image ocean = null;
-	private Image sunset = null;
-	private Image mountain = null;
-	private Image score = null;
-	
 	
 	public void paint(Graphics g) {
+		
+		setLvl(bird);
+		//randomize obstacles in each level only once
+		
+		
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g; 
 		Font font = new Font("VERDANA", 1, 50); 
@@ -210,19 +230,20 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		score = getImage("score.png");
 		
 		//g.drawRect(200, 200,400, 400);
-		if(level==0) {
+		if(bird.getLevel()%4==0) {
 			g2.drawImage(grass, 0, 0, 1275, 695, this);
 		}
-		if(level==1) {
+		if(bird.getLevel()%4==1) {
 			g2.drawImage(ocean, 0, 0, 1300, 700, this);
 		}
-		if(level==2) {
+		if(bird.getLevel()%4==2) {
 			g2.drawImage(mountain, 0, 0, 1300, 700, this);
 		}
-		if(level==3) {
+		if(bird.getLevel()%4==3) {
 			g2.drawImage(sunset, 0, 0, 1275, 695, this);
 		}
 
+		g.drawRect(bird.getX(),bird.getY(),bird.getWidth(),bird.getHeight());
 		
 		//paint obstacles
 		for(Obstacle ob: top) {
@@ -244,6 +265,29 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		g.setColor(Color.white);
 		
 		g.drawString(""+bird.getScore(), 1140, 140);
+		
+		
+		
+		//collision
+		
+			for(Obstacle b: bottom){
+				if(b.collide(bird)) {
+					bird.reset();
+				}
+			}
+			
+			for(Obstacle t: top) {
+				if(t.collide(bird)) {
+					bird.reset();
+				}
+			}
+			
+			for(Coin c: coins) {
+				if(c.collide(bird)) {
+					coins.remove(c);
+					bird.setScore();
+				}
+			}
 		
 	}
 

@@ -6,34 +6,39 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Obstacle {
 
-	public int x;
-	public int y;
-	public int width;
-	public int length;
-	public Color c;
+	private int x;
+	private int y;
+	private int width;
+	private int length;
+	private Color c;
 	private Image pole;
+	private ArrayList<Obstacle> top = new ArrayList<Obstacle>();
+	private ArrayList<Obstacle> bottom = new ArrayList<Obstacle>();
+	
 	
 	public Obstacle(int x, int y, int width, int length, Boolean isTop) {
 		this.x=x;
 		this.y=y;
 		this.width=width;
 		this.length=length;
+		
 		if(isTop) {
 			pole = getImage("image.png");
 		}else {
 			pole = getImage("pole.png");
 		}
-		
 	}
 	
 	
 	public void paint(Graphics g) {
 		g.drawImage(pole, x, y, null);
+		g.drawRect(x, y, width, length);
 	}
 	
 	public boolean collide(Bird b) {
@@ -44,10 +49,16 @@ public class Obstacle {
 		}return false;
 	}
 	
-	public void oscillate() {
-		
-	}
 
+
+	public ArrayList<Obstacle> getTop(){
+		return top;
+	}
+	
+	public ArrayList<Obstacle> getBottom(){
+		return bottom;
+	}
+	
 	
 	private Image getImage(String path) {
 		Image tempImage = null;

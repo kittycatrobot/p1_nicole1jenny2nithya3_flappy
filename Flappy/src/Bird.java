@@ -160,11 +160,18 @@ public class Bird {
 		return score;
 	}
 	
+	public void setScore() {
+		score++;
+	}
+	
+	public void setMode(boolean b) {
+		gameOver = b;
+	}
 
 
 	/* Helper function for collision detection later */
 	public Rectangle getRect() {
-		Rectangle temp = new Rectangle(x,y,width,height);
+		Rectangle temp = new Rectangle(x,y,width-20,height-20);
 		return temp;
 	}
 	

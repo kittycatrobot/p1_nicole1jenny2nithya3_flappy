@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.net.URL;
 
@@ -15,11 +16,10 @@ public class Coin {
 	private Image img;
 	
 	
-	public Coin() {
+	public Coin(int x, int y) {
+		this.x=x;
+		this.y=y;
 		radius=50;
-		y=(int)(Math.random()*900);
-		x=(int)(Math.random()*1600);
-		c=Color.YELLOW;
 		img=getImage("coin.png");
 	}
 	
@@ -32,6 +32,14 @@ public class Coin {
 	}
 
 
+	public boolean collide(Bird b) {
+		Rectangle r = new Rectangle(this.x, this.y,this.radius, this.radius);
+		
+		if(b.getRect().intersects(r)) {
+			return true;
+		}return false;
+	}
+	
 
 	private Image getImage(String path) {
 		Image tempImage = null;
